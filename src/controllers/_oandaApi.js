@@ -24,4 +24,9 @@ oandaApi.accountsUrl = () => {
     return url;
 };
 
+oandaApi.instrumentsUrl = () => {
+    const url = `https://${domain}/v3/accounts/${accountId}/instruments`;
+    return url;
+};
+
 module.exports = oandaApi;
