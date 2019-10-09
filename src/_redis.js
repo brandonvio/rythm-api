@@ -16,20 +16,17 @@ _redis.keysAsync = promisify(_redis.client.keys).bind(_redis.client);
 _redis.hmgetAsync = promisify(_redis.client.hmget).bind(_redis.client);
 
 _redis.getInstruments = async () => {
-  const instruments = await _redis.keysAsync("INSTRUMENT*");
+  const instrument_keys = await _redis.keysAsync("INSTRUMENT*");
   const list = [];
-  for (ins of instruments) {
-    let _ins = JSON.parse(await _redis.getAsync(ins));
-    // const key = `PRICEJ_${_ins.name}`;
-    // console.log(key);
-    let price = JSON.parse(await _redis.getAsync(`PRICEJ_${_ins.name}`));
-    console.log(_ins);
-    console.log(price);
-    _ins.ask = price.ask;
-    _ins.bid = price.bid;
-    _ins.spread = price.spread;
-    console.log(_ins);
-    list.push(_ins);
+  for (key of instrument_keys) {
+    let instrument_data = JSON.parse(await _redis.getAsync(key));
+    let price = JSON.parse(
+      await _redis.getAsync(`PRICEJ_${instrument_data.name}`)
+    );
+    instrument_data.ask = price.ask;
+    instrument_data.bid = price.bid;
+    instrument_data.spread = price.spread;
+    list.push(instrument_data);
   }
   return list;
 };
