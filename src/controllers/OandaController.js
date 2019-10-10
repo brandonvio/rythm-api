@@ -18,15 +18,19 @@ controller.getInstruments = async (req, res) => {
     const data = await _oandaApi.get(url);
     const instruments = data.instruments;
     for (inst of instruments) {
-      price = await _redis.getAsync(`PRICEJ_${inst.name}`);
-      console.log(inst.name, price);
+      // price = await _redis.getAsync(`PRICEJ_${inst.name}`);
+      // console.log(inst.name, price);
 
-      if (price) {
-        price = JSON.parse(price);
-        inst.ask = price.ask;
-        inst.bid = price.bid;
-        inst.spread = price.spread;
-      }
+      // if (price) {
+      //   price = JSON.parse(price);
+      //   inst.ask = price.ask;
+      //   inst.bid = price.bid;
+      //   inst.spread = price.spread;
+      // }
+
+      inst.ask = 0;
+      inst.bid = 0;
+      inst.spread = 0;
     }
     res.send(instruments);
   } catch (exception) {
