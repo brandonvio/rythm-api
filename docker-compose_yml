@@ -1,7 +1,7 @@
 version: "3"
 services:
   api:
-    image: matrixacr.azurecr.io/rythm-app:latest
+    image: matrixacr.azurecr.io/rythm-api:latest
     build: .
     networks:
       - backend
@@ -9,7 +9,7 @@ services:
       - "3000:3000"
 
   web-cli:
-    image: matrixacr.azurecr.io/rythm-app:latest
+    image: matrixacr.azurecr.io/rythm-api:latest
     networks:
       - backend
     command: sh
