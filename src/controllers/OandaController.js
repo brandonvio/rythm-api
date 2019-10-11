@@ -38,4 +38,31 @@ controller.getInstruments = async (req, res) => {
   }
 };
 
+controller.getInstrumentr = async (req, res) => {
+  try {
+    const url = _oandaApi.instrumentsUrl();
+    const data = await _oandaApi.get(url);
+    const instruments = data.instruments;
+    for (inst of instruments) {
+      price = await _redis.getAsync(`PRICEJ_${inst.name}`);
+      console.log(inst.name, price);
+
+      if (price) {
+        price = JSON.parse(price);
+        inst.ask = price.ask;
+        inst.bid = price.bid;
+        inst.spread = price.spread;
+      }
+
+      inst.ask = 0;
+      inst.bid = 0;
+      inst.spread = 0;
+    }
+    res.send(instruments);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+};
+
 module.exports = controller;

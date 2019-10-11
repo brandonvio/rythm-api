@@ -8,6 +8,7 @@ router.post("/trader/start", mainController.startTrader);
 router.get("/trader/status", mainController.getTraderStatus);
 router.get("/account", oandaController.getAccount);
 router.get("/instruments", oandaController.getInstruments);
+router.get("/instrumentr", oandaController.getInstrumentr);
 
 // router.get("/instruments", InstrumentController.getInstruments);
 // router.get("/candles/summary", InstrumentController.getCandleSummary);
