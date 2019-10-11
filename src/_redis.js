@@ -6,16 +6,20 @@ const redis_password = process.env.REDIS_PASSWORD;
 
 _redis = {};
 
-_redis.client = redis.createClient({
-  host: redis_domain,
-  password: redis_password
-});
+function getRedisClient() {
+  return redis.createClient({
+    host: redis_domain,
+    password: redis_password
+  });
+}
 
+_redis.client = getRedisClient();
 _redis.getAsync = promisify(_redis.client.get).bind(_redis.client);
 _redis.keysAsync = promisify(_redis.client.keys).bind(_redis.client);
 _redis.hmgetAsync = promisify(_redis.client.hmget).bind(_redis.client);
 
 _redis.getInstruments = async () => {
+  _redis.client = getRedisClient();
   const instrument_keys = await _redis.keysAsync("INSTRUMENT*");
   const list = [];
   for (key of instrument_keys) {
