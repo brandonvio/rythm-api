@@ -1,10 +1,11 @@
 rabbit = require("../_rabbit");
-redis = require("../_redis");
+RedisService = require("../_redis");
 controller = {};
 
 controller.getInstruments = async (req, res) => {
   try {
-    const data = await redis.getInstruments();
+    redisService = new RedisService();
+    const data = await redisService.getInstruments();
     res.send(data);
   } catch (err) {
     console.log(err);
