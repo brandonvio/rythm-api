@@ -10,6 +10,7 @@ router.get("/account", oandaController.getAccount);
 router.get("/instruments", oandaController.getInstruments);
 router.get("/instrumentr", mainController.getInstruments);
 router.get("/testrabbit", mainController.testRabbit);
+router.get("/testredis", mainController.testRedis);
 
 // router.get("/instruments", InstrumentController.getInstruments);
 // router.get("/candles/summary", InstrumentController.getCandleSummary);
