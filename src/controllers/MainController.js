@@ -33,4 +33,10 @@ controller.startTrader = async (req, res) => {
   res.sendStatus(200);
 };
 
+controller.testRabbit = async (req, res) => {
+  // 10.0.188.51
+  rabbit.testRabbit();
+  res.sendStatus(200);
+};
+
 module.exports = controller;
