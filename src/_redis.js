@@ -12,7 +12,8 @@ class RedisService {
   getRedisClient() {
     const client = {};
     const _client = redis.createClient({
-      host: "honking-robin-redis-master.default.svc.cluster.local"
+      host: "honking-robin-redis-master.default.svc.cluster.local",
+      password: redis_password
     });
     client.setAsync = promisify(_client.set).bind(_client);
     client.getAsync = promisify(_client.get).bind(_client);
