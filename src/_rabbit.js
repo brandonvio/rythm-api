@@ -35,7 +35,7 @@ rabbit.testRabbit = () => {
     const rabbit_username = process.env.RABBIT_USERNAME;
     const rabbit_password = process.env.RABBIT_PASSWORD;
     const rabbit_domain = process.env.RABBIT_DOMAIN;
-    const rabbit_connectionstring = `amqps://${rabbit_username}:${rabbit_password}@10.244.0.53`;
+    const rabbit_connectionstring = `amqps://${rabbit_username}:${rabbit_password}@10.244.0.53:5672`;
     console.log(rabbit_connectionstring);
     amqp.connect(rabbit_connectionstring, function(error0, connection) {
       console.log("connecting...");
