@@ -39,4 +39,11 @@ controller.testRabbit = async (req, res) => {
   res.sendStatus(200);
 };
 
+controller.testRedis = async (req, res) => {
+  // 10.0.188.51
+  redisService = new RedisService();
+  await redisService.testRedis();
+  res.sendStatus(200);
+};
+
 module.exports = controller;

@@ -12,9 +12,9 @@ class RedisService {
   getRedisClient() {
     const client = {};
     const _client = redis.createClient({
-      host: redis_domain,
-      password: redis_password
+      host: "honking-robin-redis-master.default.svc.cluster.local"
     });
+    client.setAsync = promisify(_client.set).bind(_client);
     client.getAsync = promisify(_client.get).bind(_client);
     client.keysAsync = promisify(_client.keys).bind(_client);
     client.hmgetAsync = promisify(_client.hmget).bind(_client);
@@ -36,6 +36,14 @@ class RedisService {
       list.push(instrument_data);
     }
     return list;
+  }
+
+  async testRedis() {
+    const _redis = this.client;
+    await _redis.setAsync("hi", "Hello World! From f'ing Redis!");
+
+    const value = await _redis.getAsync("hi");
+    console.log(value);
   }
 }
 
