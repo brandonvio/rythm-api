@@ -18,6 +18,6 @@ node {
         echo "Push new docker image to container repository."
         sh "docker push matrixacr.azurecr.io/rythm-api:$env.BUILD_ID"
         echo "Deploy to kubernetes cluster."
-        sh "/usr/local/bin/kubectl set image deployments/rythm-api rythm-api=matrixacr.azurecr.io/rythm-api:$git_head --kubeconfig /var/jenkins_home/secrets/azure-k8-config"
+        sh "/usr/local/bin/kubectl set image deployments/rythm-api rythm-api=matrixacr.azurecr.io/rythm-api:$env.BUILD_ID --kubeconfig /var/jenkins_home/secrets/azure-k8-config"
     }
 }
