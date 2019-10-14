@@ -12,7 +12,7 @@ class RedisService {
   getRedisClient() {
     const client = {};
     const _client = redis.createClient({
-      host: "matrix-redis-master.default.svc.cluster.local",
+      host: redis_domain,
       password: redis_password
     });
     client.setAsync = promisify(_client.set).bind(_client);
