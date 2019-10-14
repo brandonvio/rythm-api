@@ -1,4 +1,5 @@
 const { promisify } = require("util");
+const _ = require("lodash");
 const redis = require("redis");
 
 const redis_domain = process.env.REDIS_DOMAIN;
@@ -25,7 +26,7 @@ class RedisService {
   async getInstruments() {
     const _redis = this.client;
     const instrument_keys = await _redis.keysAsync("INSTRUMENT*");
-    const list = [];
+    let list = [];
     for (let key of instrument_keys) {
       let instrument_data = JSON.parse(await _redis.getAsync(key));
       let price = JSON.parse(
@@ -36,6 +37,10 @@ class RedisService {
       instrument_data.spread = price.spread;
       list.push(instrument_data);
     }
+
+    list = _.orderBy(list, ["name"], ["asc"]);
+
+    console.log(list);
     return list;
   }
 

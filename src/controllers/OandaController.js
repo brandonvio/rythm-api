@@ -1,5 +1,6 @@
 const _oandaApi = require("./_oandaApi");
 const _redis = require("../_redis");
+const _ = require("lodash");
 controller = {};
 
 controller.getAccount = async (req, res) => {
@@ -58,6 +59,9 @@ controller.getInstrumentr = async (req, res) => {
       inst.bid = 0;
       inst.spread = 0;
     }
+
+    instruments = _.orderByx(instruments, ["name"], ["asc"]);
+
     res.send(instruments);
   } catch (err) {
     console.log(err);
