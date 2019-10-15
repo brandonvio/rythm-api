@@ -20,7 +20,30 @@ class RedisService {
     client.getAsync = promisify(_client.get).bind(_client);
     client.keysAsync = promisify(_client.keys).bind(_client);
     client.hmgetAsync = promisify(_client.hmget).bind(_client);
+    client.hmgetAsync = promisify(_client.hmget).bind(_client);
+    client.llenAsync = promisify(_client.llen).bind(_client);
+    client.lrangeAsync = promisify(_client.lrange).bind(_client);
+    client.rpushAsync = promisify(_client.rpush).bind(_client);
+
     return client;
+  }
+
+  async llen(key) {
+    return await this.client.llenAsync(key);
+  }
+
+  async rpush(key, value) {
+    return await this.client.rpushAsync(key, value);
+  }
+
+  async list(key) {
+    const len = (await this.llen(key)) - 1;
+    if (len > 0) {
+      const list = this.client.lrangeAsync(key, 0, len);
+      return list;
+    } else {
+      return [];
+    }
   }
 
   async getInstruments() {
