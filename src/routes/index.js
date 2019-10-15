@@ -14,7 +14,8 @@ router.get("/instrumentr", mainController.getInstruments);
 router.get("/testrabbit", mainController.testRabbit);
 router.get("/testredis", mainController.testRedis);
 
-router.get("/symbols", iexcloudController.getSymbols);
+router.get("/iexcloud/stocksetf", iexcloudController.getSymbols);
+router.get("/iexcloud/crypto", iexcloudController.getCryptoSymbols);
 
 // router.get("/instruments", InstrumentController.getInstruments);
 // router.get("/candles/summary", InstrumentController.getCandleSummary);
