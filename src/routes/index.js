@@ -8,9 +8,9 @@ router.get("/intervals", mainController.getIntervals);
 router.post("/trader/start", mainController.startTrader);
 router.get("/trader/status", mainController.getTraderStatus);
 router.get("/account", oandaController.getAccount);
-router.get("/instruments", oandaController.getInstruments);
+router.get("/currencies", oandaController.getInstruments);
 router.get("/instrumentr", mainController.getInstruments);
-router.get("/instrumentr", mainController.getInstruments);
+// router.get("/instrumentr", mainController.getInstruments);
 router.get("/testrabbit", mainController.testRabbit);
 router.get("/testredis", mainController.testRedis);
 

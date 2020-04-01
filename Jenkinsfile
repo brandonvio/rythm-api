@@ -1,8 +1,8 @@
 node {
     stage('get code from github'){
         git(
-           url: 'https://github.com/brandonrvice/rythm-api.git',
-           credentialsId: 'e4129cd7-8637-49b0-9358-8173688908c0',
+           url: 'https://github.com/brandonvio/rythm-api',
+           credentialsId: 'aa1cfaef-9e77-4449-9208-43d6f6a8de44',
            branch: "master"
         )
     }
