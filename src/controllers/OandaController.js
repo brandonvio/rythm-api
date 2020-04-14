@@ -33,8 +33,8 @@ controller.getInstruments = async (req, res) => {
       inst.bid = 0;
       inst.spread = 0;
     }
-    _.sortBy(instruments, ["name"]);
-    res.send(instruments);
+    const sorted = _.sortBy(instruments, ["name"]);
+    res.send(sorted);
   } catch (exception) {
     res.sendStatus(500);
   }
